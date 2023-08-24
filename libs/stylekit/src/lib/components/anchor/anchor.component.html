@@ -1,0 +1,17 @@
+<!-- NOTE: Must handle external and internal links differently since directives can't be dynamically added at the time of writing this -->
+
+<a *ngIf="isExternalLink" class="lib-anchor ui-btn-20 ui-btn-40-tablet" [href]="link">
+  <ng-template [ngTemplateOutlet]="contentTemplateRef"></ng-template>
+</a>
+
+<a *ngIf="!isExternalLink" class="lib-anchor" [routerLink]="link" routerLinkActive="active">
+  <ng-template [ngTemplateOutlet]="contentTemplateRef"></ng-template>
+</a>
+
+<!--
+  IMPORTANT: Must place <ng-content> inside an <ng-template> or only the last <ng-content> is used.
+  See https://github.com/angular/angular/issues/7795#issuecomment-361552386 for solution used and the overall issue thread for the problem.
+-->
+<ng-template #contentTemplateRef>
+  <ng-content></ng-content>
+</ng-template>
